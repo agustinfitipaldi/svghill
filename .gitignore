@@ -8,10 +8,13 @@ __pycache__/
 .idea/
 .claude/
 
-# Source recordings — not for the public repo (frames are committed instead)
-mother.mov
+# Source recordings & derived frames — too big for GitHub; they live in Drive.
+# Charts are the shareable outputs and stay committed.
+/*.mov
 clips/
+frames/
 
 # Private instructions & hand-recorded ground truth
 CLAUDE.md
 data.txt
+boxcheck/
