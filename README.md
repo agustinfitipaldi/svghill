@@ -1,6 +1,8 @@
 # Deviation in driving of Austin Hill (#33) on Turn 3 — Chicagoland Speedway, eero 400
 ###### By Agustin Fitipaldi
 
+<img width="940" height="969" alt="overlay_smooth_wide" src="https://github.com/user-attachments/assets/ec99c348-8a5f-4188-8f1e-7e6bad23c41a" />
+
 
 # Summary
 Using publicly (paid) available driver cam footage from HBO Max, I extracted per-frame MPH and RPM data from Austin Hill's and Shane van Gisbergen's in-car telemetry overlay across 7 consecutive green laps at Chicagoland, including the lap on which the cars made contact. The data shows a clear, measurable deviation from Hill's own established behavior beginning approximately half a second before contact, consistent with deliberate additional braking or throttle lift beyond what the corner required.
@@ -18,21 +20,32 @@ To establish a precise collision timestamp, I used two approaches:
 
 Both methods landed on the same MPH and RPM values: 156mph and 5,142 rpm. This is marked as the red "contact" line on the chart.
 
-# What the Data Shows
+The precise timestamps I used for the second approach can be seen in the "new cuts.txt" file.
+
+# Data Overview
+<img width="940" height="969" alt="overlay" src="https://github.com/user-attachments/assets/21d6b5c2-c152-4992-b44a-9a69b88ac6d6" />
+<img width="940" height="969" alt="overlay" src="https://github.com/user-attachments/assets/0933ce81-aa23-4bf6-96f6-de85c84dbf9b" />
+
 Laps 41-46 cluster tightly in both speed and RPM for Hill, while varying more with SVG.
 
 On Lap 47, we can see a sharp drop in RPM about half a second before contact, this leads to a MPH curve that is still decelerating and in the moment before impact is on a noticeably different path compared to previous laps.
 
-For SVG we see a noticeable hang onto velocity past where he usually let off in preceding laps, which leads to a more aggressive bleed as he approaches the corner, and collides with Hill.
+For SVG we see a significant hang onto velocity past where he usually let off in preceding laps, which leads to a more aggressive bleed as he approaches the corner and collides with Hill.
 
 # Radio Context
 In the roughly 15 seconds before collision, the following exchange occurred between Hill, his crew chief, and his spotter:
+
 **Crew chief:** Seems to still be using a little bit more brake than everybody getting into 1.
+
 **Spotter:** 34, two back to the 97, you're using more brake than everybody else getting into 1, try to work off of that.
+
 **Hill:** Just leave me alone.
+
 **Spotter:** Pass (?) out of line to the bottom inside bumper he's there this time, bumper, clear, clear, 3/4 to 1 now... he's gonna drive up to you — *[collision]*
 
 With “3/4 to 1 now” occurring between the -3 and -2 second mark prior to contact.
 
 # Limitations
-This is not SMT telemetry. This is OCR-scraped data from a broadcast overlay, recorded off a streaming platform. There is inherent noise in the extraction and the synchronization of clips for the impact moment had to rely on finnicky camera perspectives.
+This is not SMT telemetry. This is OCR-scraped data from a broadcast overlay, recorded off a streaming platform. There is inherent noise in the extraction and the synchronization of clips for the impact moment had to rely on finnicky camera perspectives. OCR got confused a lot on the font for the telemetry which meant I had to go over a lot of the csv's and manually edit them while scrubbing through the video accordingly.
+
+Feel free to contact me if you spot any mistakes or have anything else to contribute.
