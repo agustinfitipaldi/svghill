@@ -163,7 +163,7 @@ def plot_all(out_png, xlim=None, smoothed=False, highlight=False, figsize=(12, 8
         else:
             ax.margins(x=0.01)
     # place the contact label using the (possibly zoomed) axis limits
-    ax_rpm.annotate("contact", xy=(0, ax_rpm.get_ylim()[1]),
+    ax_rpm.annotate("contact with #97", xy=(0, ax_rpm.get_ylim()[1]),
                     xytext=(3, -3), textcoords="offset points",
                     ha="left", va="top", color="red", fontsize=9,
                     fontweight="bold")
@@ -176,7 +176,7 @@ def plot_all(out_png, xlim=None, smoothed=False, highlight=False, figsize=(12, 8
         ax_mph.legend(ncol=7, loc="lower center", fontsize=9,
                       bbox_to_anchor=(0.5, 1.02), frameon=False)
     ax_mph.set_title(
-        "Lap 47 vs. baseline",
+        "Austin Hill in Lap 47 vs. baseline in Turn 3",
         fontweight="bold", pad=28)
     fig.savefig(out_png, dpi=120, bbox_inches="tight")
     plt.close(fig)
