@@ -1,5 +1,8 @@
 # Deviation in driving of Austin Hill (#33) on Turn 3 — Chicagoland Speedway, eero 400
 ###### By Agustin Fitipaldi
+
+<img width="940" height="969" alt="all_laps_telemetry_smooth_highlight" src="https://github.com/user-attachments/assets/54ad3665-97c2-45b1-bc98-deab07d5931f" />
+
 # Summary
 Using publicly (paid) available driver cam footage from HBO Max, I extracted per-frame MPH and RPM data from Austin Hill's in-car telemetry overlay across 7 consecutive green laps at Chicagoland, including the lap on which he made contact with Shane van Gisbergen's #97. The data shows a clear, measurable deviation from Hill's own established behavior beginning approximately half a second before contact, consistent with deliberate additional braking or throttle lift beyond what the corner required.
 
