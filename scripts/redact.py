@@ -3,7 +3,7 @@
 
 The frames are full-screen OBS captures, so the top ~42px is the Chrome
 address bar showing the HBO Max URL with its session UUIDs. This paints a
-black rectangle over the top REDACT_H pixels of every clip*_frames/*.png,
+black rectangle over the top REDACT_H pixels of every frames/clip*/*.png,
 in place, before the frames get pushed to a public repo.
 
 REDACT_H (60) sits well below the toolbar (~42px) and well above where the
@@ -25,8 +25,12 @@ def redact(path):
     im.save(path)
 
 
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FRAMES_DIR = os.path.join(ROOT, "frames")
+
+
 def main():
-    frames = sorted(glob.glob(os.path.join("clip*_frames", "*.png")))
+    frames = sorted(glob.glob(os.path.join(FRAMES_DIR, "clip*", "*.png")))
     print(f"Redacting top {REDACT_H}px of {len(frames)} frames...")
     with ThreadPoolExecutor(max_workers=8) as ex:
         list(ex.map(redact, frames))

@@ -7,6 +7,7 @@ interpolated stretches are visually distinguishable from clean OCR reads.
 """
 import csv
 import glob
+import os
 import re
 
 import matplotlib
@@ -14,6 +15,11 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.ticker import MultipleLocator
 from matplotlib.lines import Line2D
+
+# repo root = parent of the scripts/ dir this file lives in
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TELEMETRY_DIR = os.path.join(ROOT, "telemetry")
+CHARTS_DIR = os.path.join(ROOT, "charts")
 
 MPH_COLOR = "#1f77b4"   # blue
 RPM_COLOR = "#d62728"   # red
@@ -118,7 +124,7 @@ def plot_all(out_png, xlim=None, smoothed=False, highlight=False, figsize=(12, 8
     highlight=True greys out laps 41-46 so the collision lap (47) pops.
     figsize sets the overall figure proportions."""
     prep = smooth if smoothed else (lambda v: v)
-    paths = sorted(glob.glob("clip*_telemetry.csv"),
+    paths = sorted(glob.glob(os.path.join(TELEMETRY_DIR, "clip*_telemetry.csv")),
                    key=lambda x: int(re.search(r"\d+", x).group()))
     fig, (ax_mph, ax_rpm) = plt.subplots(
         2, 1, figsize=figsize, sharex=True,
@@ -178,17 +184,19 @@ def plot_all(out_png, xlim=None, smoothed=False, highlight=False, figsize=(12, 8
 
 
 def main():
-    for csv_path in sorted(glob.glob("clip*_telemetry.csv"),
+    os.makedirs(CHARTS_DIR, exist_ok=True)
+    out = lambda name: os.path.join(CHARTS_DIR, name)
+    for csv_path in sorted(glob.glob(os.path.join(TELEMETRY_DIR, "clip*_telemetry.csv")),
                            key=lambda x: int(re.search(r"\d+", x).group())):
         n = re.search(r"clip(\d+)", csv_path).group(1)
-        plot_clip(csv_path, f"clip{n}_telemetry.png")
-    plot_all("all_laps_telemetry.png")
-    plot_all("all_laps_telemetry_smooth.png", smoothed=True)
-    plot_all("all_laps_telemetry_3-7s.png", xlim=(3, 7))
-    plot_all("all_laps_telemetry_3-7s_smooth.png", xlim=(3, 7), smoothed=True)
-    plot_all("all_laps_telemetry_smooth_highlight.png", smoothed=True, highlight=True,
+        plot_clip(csv_path, out(f"clip{n}_telemetry.png"))
+    plot_all(out("all_laps_telemetry.png"))
+    plot_all(out("all_laps_telemetry_smooth.png"), smoothed=True)
+    plot_all(out("all_laps_telemetry_3-7s.png"), xlim=(3, 7))
+    plot_all(out("all_laps_telemetry_3-7s_smooth.png"), xlim=(3, 7), smoothed=True)
+    plot_all(out("all_laps_telemetry_smooth_highlight.png"), smoothed=True, highlight=True,
              figsize=(9, 9))
-    plot_all("all_laps_telemetry_3-7s_smooth_highlight.png",
+    plot_all(out("all_laps_telemetry_3-7s_smooth_highlight.png"),
              xlim=(3, 7), smoothed=True, highlight=True, figsize=(9, 9))
 
 

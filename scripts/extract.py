@@ -246,11 +246,18 @@ def process_clip(clip_dir, out_csv):
     return list(zip([i / FPS for i in range(len(rows))], mph_i, rpm_i))
 
 
+# repo root = parent of the scripts/ dir this file lives in
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+FRAMES_DIR = os.path.join(ROOT, "frames")
+TELEMETRY_DIR = os.path.join(ROOT, "telemetry")
+
+
 def main():
-    clips = sorted(glob.glob("clip*_frames"))
+    os.makedirs(TELEMETRY_DIR, exist_ok=True)
+    clips = sorted(glob.glob(os.path.join(FRAMES_DIR, "clip*")))
     for cd in clips:
-        n = re.search(r"clip(\d+)", cd).group(1)
-        process_clip(cd, f"clip{n}_telemetry.csv")
+        n = re.search(r"clip(\d+)", os.path.basename(cd)).group(1)
+        process_clip(cd, os.path.join(TELEMETRY_DIR, f"clip{n}_telemetry.csv"))
 
 
 if __name__ == "__main__":
